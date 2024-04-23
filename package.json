@@ -1,0 +1,17 @@
+{
+  "name": "no-pazzword",
+  "version": "1.0.0",
+  "description": "A command-line password manager program.",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "read": "^3.0.1",
+    "typescript": "^5.4.5"
+  }
+}
