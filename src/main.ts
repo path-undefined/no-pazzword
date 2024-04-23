@@ -16,6 +16,7 @@ import { printEmptyLine, printErrorLine } from "./console-output";
   printEmptyLine();
 
   const args: string[] = process.argv.slice(2);
+
   switch(args[0]) {
     case "add":
     case "create":

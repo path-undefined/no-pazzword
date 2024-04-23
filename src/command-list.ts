@@ -17,7 +17,7 @@ export async function listAccount(args: string[], accountManager: AccountManager
     options,
   });
 
-  const query = argsParseResult.values.query;
+  const query = argsParseResult.values["query"];
 
   const accounts = accountManager.listAccount(query);
 

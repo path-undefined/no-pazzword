@@ -21,7 +21,6 @@ export async function addAccount(args: string[], accountManager: AccountManager)
     "message": {
       type: "string" as const,
       short: "m",
-      default: "",
     },
   };
 
@@ -31,27 +30,25 @@ export async function addAccount(args: string[], accountManager: AccountManager)
   });
   
   const values = argsParseResult.values;
+  let site: string;
+  let username: string;
   let password: string;
+  let message: string;
 
-  if (!values.site) {
-    values.site = await askForInput("Site: ");
-  }
-
-  if (!values.username) {
-    values.username = await askForInput("Username: ");
-  }
-
+  site = values["site"] || (await askForInput("Site: "));
+  username = values["username"] || (await askForInput("Username: "));
+  
   if (values["password"]) {
-    password = await askForSecret("Password:");
-  } else {
+    password = await askForSecret("Password (or empty for random password): ");
+  }
+  if (!password) {
     password = getRandomString();
   }
 
+  message = values["message"] || (await askForInput("Message: "));
+
   accountManager.addAccount({
-    site: values.site,
-    username: values.username,
-    password,
-    message: values.message,
+    site, username, password, message,
     updatedAt: Date.now(),
   });
 }
