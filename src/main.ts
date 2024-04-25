@@ -39,6 +39,7 @@ import { printEmptyLine, printErrorLine } from "./console-output";
   
     default:
       printErrorLine(`Unknown command: ${args[0]}`);
+      process.exit();
   }
 
   accountManager.saveAccountFile();
