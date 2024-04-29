@@ -78,9 +78,15 @@ export async function updateAccount(args: string[], accountManager: AccountManag
 
   message = values["message"];
 
-  accountManager.updateAccount(site, username, {
+  const newAccount = {
     password,
     message,
     updatedAt: Date.now()
-  });
+  };
+
+  Object.keys(newAccount)
+    .filter((key) => newAccount[key] === undefined || newAccount[key] === null)
+    .forEach((key) => { delete newAccount[key] });
+
+  accountManager.updateAccount(site, username, newAccount);
 }

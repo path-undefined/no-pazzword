@@ -36,7 +36,9 @@ export async function deleteAccount(args: string[], accountManager: AccountManag
 
     if (accounts.length < 1) {
       printErrorLine(`Query "${values["query"]}" doesn't match any account.`);
-    } else if (accounts.length > 1) {
+      return;
+    }
+    if (accounts.length > 1) {
       printErrorLine(`Query "${values["query"]}" matches more than 1 account.`);
 
       for (const account of accounts) {
@@ -46,10 +48,10 @@ export async function deleteAccount(args: string[], accountManager: AccountManag
         }
         printEmptyLine();
       }
-    } else {
-      site = accounts[0].site;
-      username = accounts[0].username;
     }
+
+    site = accounts[0].site;
+    username = accounts[0].username;
   } else {
     printErrorLine("Please specify site and username or provide a search query.");
   }
