@@ -50,6 +50,13 @@ export class AccountManager {
     this.accountLookup[account.site][account.username] = account;
   }
 
+  public updateAccount(site: string, username: string, account: Partial<Account>) {
+    this.accountLookup[site][username] = {
+      ... this.accountLookup[site][username],
+      ... account
+    };
+  }
+
   public listAccount(query: string): Account[] {
     const queryWords = query.split(" ");
     const results: Account[] = [];

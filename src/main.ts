@@ -2,6 +2,7 @@ import { addAccount } from "./command-add";
 import { listAccount } from "./command-list";
 import { getAccount } from "./command-get";
 import { deleteAccount } from "./command-delete";
+import { updateAccount } from "./command-update";
 import { askForSecret } from "./console-input";
 import { AccountManager } from "./account-manager";
 import { printEmptyLine, printErrorLine } from "./console-output";
@@ -35,6 +36,11 @@ import { printEmptyLine, printErrorLine } from "./console-output";
     case "delete":
     case "remove":
       await deleteAccount(args.slice(1), accountManager);
+    break;
+
+    case "update":
+    case "modify":
+      await updateAccount(args.slice(1), accountManager);
     break;
   
     default:
