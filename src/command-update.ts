@@ -1,6 +1,6 @@
 import { parseArgs } from "node:util";
 import { askForInput, askForSecret } from "./console-input";
-import { AccountManager } from "./account-manager";
+import { Account, AccountManager } from "./account-manager";
 import { getRandomString } from "./random-string";
 import { printEmptyLine, printErrorLine, printHeadline, printLine } from "./console-output";
 
@@ -36,12 +36,12 @@ export async function updateAccount(args: string[], accountManager: AccountManag
   const values = argsParseResult.values;
   let site: string;
   let username: string;
-  let password: string;
-  let message: string;
+  let password: string | null = null;
+  let message: string | null = null;
 
   if (values["site"] && values["username"]) {
-    site = values["site"] || (await askForInput("Site: "));
-    username = values["username"] || (await askForInput("Username: "));
+    site = values["site"] ?? (await askForInput("Site: "));
+    username = values["username"] ?? (await askForInput("Username: "));
   } else if (values["query"]) {
     const accounts = accountManager.listAccount(values["query"]);
 
@@ -67,6 +67,7 @@ export async function updateAccount(args: string[], accountManager: AccountManag
     username = accounts[0].username;
   } else {
     printErrorLine("Please specify site and username or provide a search query.");
+    return;
   }
 
   if (values["password"]) {
@@ -76,17 +77,14 @@ export async function updateAccount(args: string[], accountManager: AccountManag
     password = getRandomString();
   }
 
-  message = values["message"];
+  message = values["message"] ?? null;
 
-  const newAccount = {
-    password,
-    message,
-    updatedAt: Date.now()
-  };
+  const newAccount: Partial<Account> = {};
 
-  Object.keys(newAccount)
-    .filter((key) => newAccount[key] === undefined || newAccount[key] === null)
-    .forEach((key) => { delete newAccount[key] });
+  newAccount.updatedAt = Date.now();
+
+  if (password) { newAccount.password = password; }
+  if (message) { newAccount.message = message; }
 
   accountManager.updateAccount(site, username, newAccount);
 }

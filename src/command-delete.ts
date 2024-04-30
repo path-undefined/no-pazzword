@@ -1,6 +1,7 @@
 import { parseArgs } from "node:util";
 
 import { AccountManager } from "./account-manager";
+import { askForInput } from "./console-input";
 import { printEmptyLine, printErrorLine, printHeadline, printLine } from "./console-output";
 
 export async function deleteAccount(args: string[], accountManager: AccountManager) {
@@ -29,8 +30,8 @@ export async function deleteAccount(args: string[], accountManager: AccountManag
   let username: string;
 
   if (values["site"] && values["username"]) {
-    site = values["site"];
-    username = values["username"];
+    site = values["site"] ?? (await askForInput("Site: "));
+    username = values["username"] ?? (await askForInput("Username: "));
   } else if (values["query"]) {
     const accounts = accountManager.listAccount(values["query"]);
 
@@ -48,12 +49,15 @@ export async function deleteAccount(args: string[], accountManager: AccountManag
         }
         printEmptyLine();
       }
+
+      return;
     }
 
     site = accounts[0].site;
     username = accounts[0].username;
   } else {
     printErrorLine("Please specify site and username or provide a search query.");
+    return;
   }
 
   accountManager.deleteAccount(site, username);

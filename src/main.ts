@@ -11,10 +11,15 @@ import { printEmptyLine, printErrorLine } from "./console-output";
   const accountFilePath = process.env.NO_PAZZWORD_FILE;
   const mainPassword = await askForSecret("Main password: ");
 
+  printEmptyLine();
+
+  if (!accountFilePath) {
+    printErrorLine("Environment variable \"NO_PAZZWORD_FILE\" is not specified");
+    process.exit();
+  }
+
   const accountManager = new AccountManager(accountFilePath, mainPassword);
   accountManager.readAccountFile();
-
-  printEmptyLine();
 
   const args: string[] = process.argv.slice(2);
 

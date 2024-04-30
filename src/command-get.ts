@@ -1,9 +1,9 @@
 import { parseArgs } from "node:util";
 
 import { AccountManager } from "./account-manager";
-import { printEmptyLine, printErrorLine, printHeadline, printLine } from "./console-output";
 import { clearClipboard, copyToClipboard } from "./console-command";
-import { askForSecret } from "./console-input";
+import { askForInput, askForSecret } from "./console-input";
+import { printEmptyLine, printErrorLine, printHeadline, printLine } from "./console-output";
 
 export async function getAccount(args: string[], accountManager: AccountManager) {
   const options = {
@@ -31,8 +31,8 @@ export async function getAccount(args: string[], accountManager: AccountManager)
   let username: string;
 
   if (values["site"] && values["username"]) {
-    site = values["site"];
-    username = values["username"];
+    site = values["site"] ?? (await askForInput("Site: "));
+    username = values["username"] ?? (await askForInput("Username: "));
   } else if (values["query"]) {
     const accounts = accountManager.listAccount(values["query"]);
 
@@ -50,12 +50,15 @@ export async function getAccount(args: string[], accountManager: AccountManager)
         }
         printEmptyLine();
       }
+
+      return;
     }
 
     site = accounts[0].site;
     username = accounts[0].username;
   } else {
     printErrorLine("Please specify site and username or provide a search query.");
+    return;
   }
 
   const account = accountManager.getAccount(site, username);

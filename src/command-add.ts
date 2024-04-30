@@ -32,7 +32,7 @@ export async function addAccount(args: string[], accountManager: AccountManager)
   const values = argsParseResult.values;
   let site: string;
   let username: string;
-  let password: string;
+  let password: string = "";
   let message: string;
 
   site = values["site"] || (await askForInput("Site: "));
