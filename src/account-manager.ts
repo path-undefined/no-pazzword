@@ -52,8 +52,8 @@ export class AccountManager {
 
   public updateAccount(site: string, username: string, account: Partial<Account>) {
     this.accountLookup[site][username] = {
-      ... this.accountLookup[site][username],
-      ... account
+      ...this.accountLookup[site][username],
+      ...account,
     };
   }
 
@@ -63,10 +63,9 @@ export class AccountManager {
 
     for (const usernameLookup of Object.values(this.accountLookup)) {
       for (const account of Object.values(usernameLookup)) {
-        if (queryWords.every((word) => 
-          account.site.toLocaleUpperCase().includes(word.toLocaleUpperCase()) ||
-          account.username.toLocaleUpperCase().includes(word.toLocaleUpperCase())
-        )) {
+        if (queryWords.every((word) =>
+          account.site.toLocaleUpperCase().includes(word.toLocaleUpperCase())
+          || account.username.toLocaleUpperCase().includes(word.toLocaleUpperCase()))) {
           results.push(account);
         }
       }
@@ -106,7 +105,7 @@ export class AccountManager {
     const decipher = createDecipheriv(AccountManager.ENCRYPTION_ALGORITHM, key, iv);
 
     let decrypted = decipher.update(encrypted, "hex", "utf8");
-    decrypted += decipher.final('utf8');
+    decrypted += decipher.final("utf8");
 
     return decrypted;
   }

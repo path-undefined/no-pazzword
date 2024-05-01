@@ -28,7 +28,7 @@ export async function addAccount(args: string[], accountManager: AccountManager)
     args,
     options,
   });
-  
+
   const values = argsParseResult.values;
   let site: string;
   let username: string;
@@ -37,7 +37,7 @@ export async function addAccount(args: string[], accountManager: AccountManager)
 
   site = values["site"] || (await askForInput("Site: "));
   username = values["username"] || (await askForInput("Username: "));
-  
+
   if (values["password"]) {
     password = await askForSecret("Password (or empty for random password): ");
   }

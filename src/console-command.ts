@@ -5,5 +5,5 @@ export function copyToClipboard(content: string) {
 }
 
 export function clearClipboard() {
-  execSync(`echo -n '' | clip.exe`)
+  execSync("echo -n '' | clip.exe");
 }

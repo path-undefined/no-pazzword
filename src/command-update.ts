@@ -83,8 +83,12 @@ export async function updateAccount(args: string[], accountManager: AccountManag
 
   newAccount.updatedAt = Date.now();
 
-  if (password) { newAccount.password = password; }
-  if (message) { newAccount.message = message; }
+  if (password) {
+    newAccount.password = password;
+  }
+  if (message) {
+    newAccount.message = message;
+  }
 
   accountManager.updateAccount(site, username, newAccount);
 }

@@ -12,11 +12,11 @@ export function getRandomString(): string {
   return results.join(SYMBOL);
 }
 
-export function getRandomCharactersFromString (availableCharacters: string, length: number) {
-  let randomString = ''
+export function getRandomCharactersFromString(availableCharacters: string, length: number) {
+  let randomString = "";
   for (let i = 0; i < length; i++) {
-    randomString += availableCharacters.charAt(Math.floor(Math.random() * availableCharacters.length))
+    randomString += availableCharacters.charAt(Math.floor(Math.random() * availableCharacters.length));
   }
 
-  return randomString
+  return randomString;
 }

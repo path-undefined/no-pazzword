@@ -5,13 +5,18 @@
   "main": "dist/main.js",
   "scripts": {
     "build": "tsc",
+    "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@stylistic/eslint-plugin": "^1.8.0",
     "@types/node": "^20.12.7",
+    "@typescript-eslint/parser": "^7.8.0",
+    "eslint": "^8.57.0",
     "read": "^3.0.1",
+    "stylistic-default": "github:path-undefined/stylistic-default",
     "typescript": "^5.4.5"
   }
 }
