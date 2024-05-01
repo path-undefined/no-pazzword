@@ -24,31 +24,31 @@ import { printEmptyLine, printErrorLine } from "./console-output";
   const args: string[] = process.argv.slice(2);
 
   switch (args[0]) {
-    case "add" :
-    case "create" :
+    case "add":
+    case "create":
       await addAccount(args.slice(1), accountManager);
       break;
 
-    case "list" :
-    case "search" :
+    case "list":
+    case "search":
       await listAccount(args.slice(1), accountManager);
       break;
 
-    case "get" :
+    case "get":
       await getAccount(args.slice(1), accountManager);
       break;
 
-    case "delete" :
-    case "remove" :
+    case "delete":
+    case "remove":
       await deleteAccount(args.slice(1), accountManager);
       break;
 
-    case "update" :
-    case "modify" :
+    case "update":
+    case "modify":
       await updateAccount(args.slice(1), accountManager);
       break;
 
-    default :
+    default:
       printErrorLine(`Unknown command: ${args[0]}`);
       process.exit();
   }
