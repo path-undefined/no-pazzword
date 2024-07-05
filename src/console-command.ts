@@ -1,9 +1,11 @@
 import { execSync } from "node:child_process";
 
 export function copyToClipboard(content: string) {
-  execSync(`echo -n '${content}' | clip.exe`);
+  const clipboardCommand = process.env.NO_PAZZWORD_CLIPBOARD;
+  execSync(`echo -n '${content}' | ${clipboardCommand}`, { stdio: 'ignore' });
 }
 
 export function clearClipboard() {
-  execSync("echo -n '' | clip.exe");
+  const clipboardCommand = process.env.NO_PAZZWORD_CLIPBOARD;
+  execSync(`echo -n '' | ${clipboardCommand}`, { stdio: 'ignore' });
 }
