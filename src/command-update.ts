@@ -36,7 +36,7 @@ export async function updateAccount(args: string[], accountManager: AccountManag
     printLine(account.message);
   }
   printEmptyLine();
-  
+
   let site: string;
   let username: string;
   let password: string;
@@ -53,7 +53,7 @@ export async function updateAccount(args: string[], accountManager: AccountManag
   }
 
   message = await askForInput(`Message (${account.message}): `) || account.message;
-    
+
   accountManager.deleteAccount(account.site, account.username);
 
   accountManager.addAccount({

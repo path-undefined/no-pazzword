@@ -3,6 +3,8 @@ import { listAccount } from "./command-list";
 import { getAccount } from "./command-get";
 import { deleteAccount } from "./command-delete";
 import { updateAccount } from "./command-update";
+import { mergeAccount } from "./command-merge";
+
 import { askForSecret } from "./console-input";
 import { AccountManager } from "./account-manager";
 import { printEmptyLine, printErrorLine } from "./console-output";
@@ -46,6 +48,11 @@ import { printEmptyLine, printErrorLine } from "./console-output";
     case "update":
     case "modify":
       await updateAccount(args.slice(1), accountManager);
+      break;
+
+    case "merge":
+    case "import":
+      await mergeAccount(args.slice(1), accountManager);
       break;
 
     default:
