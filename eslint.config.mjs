@@ -1,6 +1,7 @@
-import stylistic from "@stylistic/eslint-plugin";
+import stylisticEslintPlugin from "@stylistic/eslint-plugin";
+import typescriptEslintPlugin from "@typescript-eslint/eslint-plugin";
 import typescriptEslintParser from "@typescript-eslint/parser";
-import stylisticDefault from "stylistic-default";
+import myEslintRules from "my-eslint-rules";
 
 export default [
   {
@@ -10,7 +11,8 @@ export default [
     ],
 
     plugins: {
-      "@stylistic": stylistic,
+      "@typescript-eslint": typescriptEslintPlugin,
+      "@stylistic": stylisticEslintPlugin,
     },
 
     languageOptions: {
@@ -18,7 +20,7 @@ export default [
     },
 
     rules: {
-      ...stylisticDefault,
+      ...myEslintRules,
     },
   },
 ];

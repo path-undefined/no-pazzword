@@ -15,15 +15,20 @@ export type Account = {
 };
 
 export class AccountManager {
-  private static ENCRYPTION_ALGORITHM = "aes-192-cbc";
-  private static ENCRYPTION_SALT = "IbwN2qbstT";
+  private static readonly ENCRYPTION_ALGORITHM = "aes-192-cbc";
+  private static readonly ENCRYPTION_SALT = "IbwN2qbstT";
 
+  private filePath: string;
+  private mainPassword: string;
   private accountLookup: AccountSiteLookup = {};
 
   public constructor(
-    private filePath: string,
-    private mainPassword: string,
-  ) {}
+    filePath: string,
+    mainPassword: string,
+  ) {
+    this.filePath = filePath;
+    this.mainPassword = mainPassword;
+  }
 
   public readAccountFile() {
     if (!existsSync(this.filePath)) {

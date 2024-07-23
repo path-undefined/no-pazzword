@@ -8,15 +8,16 @@
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "read": "^3.0.1"
+  },
   "devDependencies": {
-    "@stylistic/eslint-plugin": "^1.8.0",
-    "@types/node": "^20.12.7",
-    "@typescript-eslint/parser": "^7.8.0",
+    "@stylistic/eslint-plugin": "^1.8.1",
+    "@types/node": "^20.14.11",
+    "@typescript-eslint/eslint-plugin": "^7.16.1",
+    "@typescript-eslint/parser": "^7.16.1",
     "eslint": "^8.57.0",
-    "read": "^3.0.1",
-    "stylistic-default": "github:path-undefined/stylistic-default",
+    "my-eslint-rules": "github:path-undefined/my-eslint-rules",
     "typescript": "^5.4.5"
   }
 }
